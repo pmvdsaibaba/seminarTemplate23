@@ -1,18 +1,25 @@
 %!TEX root=../main.tex
 \section{CoCoA: Concurrent Continuous Group Key Agreement}
 \label{sec:EC:AANKPPW22}
-(Pothula, Saibaba, \cite{EC:AANKPPW22,EPRINT:AANKPPW22})
+(Pothula, Saibaba, \cite{EC:AANKPPW22,EPRINT:AANKPPW22})\\
 
-\alert{\textbf{TODO:} Provide a very brief overview of this paper.}
+Continuous Group Key Agreement (CGKA) is one of the key topics for Secure Group Messaging (SGM) which provides fresh keys continuously. Coordination of these keys/states (freshly generated/old keys) is a challenging issue in existing CGKA protocols. The paper introduces CoCoA, a new scheme addressing the challenge of efficient key updates in group messaging.
 
 \subsection{Motivation}
-\alert{\textbf{TODO:} Explain why this paper is important.}
+
+Over different versions of TreeKEM, there are two known ways of updating the keys between the users. Naive way was to just use two party key exchange across all the users. This approach gives communication overhead and few members may end up starving. These issues were addressed in a later version of TreeKEM which uses so-called "propose-and-commit” (P\&C). But this is also not efficient if many users need to update concurrently as this damages the tree structure. The motivation stems from these limitations of current proposals which involve bandwidth-intensive key rotations and unrecoverable damage.
 
 \subsection{Main Idea}
-\alert{\textbf{TODO:} Extract and explain the main novel idea from that paper. Try to make the explanation simple and make sure that one only needs to read your summary for understanding it (i.e., one should not be forced to read the original paper in order to understand what you are writing here).}
+
+The CoCoA protocol is very similar to TreeKEM operations. But when concurrent updates are invoked from users, Tree updates the node keys step by step in an incremental fashion. All the nodes towards root node with update conflicts from multiple users are updated as per a chosen priority order. With this PCS is achieved in a few more additional rounds. In this way CoCoA requires less number of rounds to recover from corruption in comparison with TreeKEMs. Also this protocol uses a kind of lite update, i.e., the signature verification keys will not be refreshed in an update.
 
 \subsection{Relation to Other Papers}
-\alert{\textbf{TODO:} Summarize the most important relations of that paper to other papers in that document. Add references (e.g., Section~\ref{sec:CCS:CCGMM18} and citations~\cite{CCS:CCGMM18}).}
+
+This paper presents a comparative analysis of other various CGKA protocols in a multi user setting for concurrent update which also considers whole cumulative sender complexity. It also discusses the "propose-and-commit" paradigm and its trade-offs in terms of efficiency and communication complexity. There is also another concurrent CGKA protocol presented as “fast healing” concurrent CGKA protocol, named DeCAF.
+\cite{EPRINT:AANKPP22}
+
 
 \subsection{Criteria for Comparison}
-\alert{\textbf{TODO:} List items with which the main idea of this paper can be emphasized and illustrated systematically. These items should simplify a summarized comparison of all papers discussed in this document.}
+
+Just related to concurrent updates, the efficiency comparison was already presented in each paper. Not sure at the moment of any other criteria for comparison.
+
